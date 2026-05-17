@@ -1,5 +1,3 @@
-let matriz = [];
-
 const linhas = 25;
 const colunas = 25;
 
@@ -23,6 +21,10 @@ const palavras = [
     "QUADCORE"
 ];
 
+let matriz = [];
+let palavrasX = [];
+let palavrasY = [];
+
 //Preenchendo matriz com ''
 function preencherMatrizVazia(matriz) {
     for (let i = 0; i < linhas; i++) {
@@ -33,8 +35,6 @@ function preencherMatrizVazia(matriz) {
     }
 }
 
-let palavrasX = [];
-let palavrasY = [];
 function sortearPalavras(palavras) {
     while (palavrasX.length != palavras.length / 2) {
         let indexPalavra = Math.floor(Math.random() * palavras.length);
@@ -76,7 +76,7 @@ function preencherPalavrasPosY(matriz, palavrasY) {
             let podeInserir = true;
 
             for (let k = 0; k < palavra.length; k++) {
-                if (matriz[pos_y + k][coluna] !== '' && matriz[pos_y + k][coluna] !== palavra[k]) {
+                if (matriz[pos_y + k][coluna] != '' && matriz[pos_y + k][coluna] != palavra[k]) {
                     podeInserir = false;
                     break;
                 }
@@ -99,7 +99,7 @@ function preencherMatrizLetras(matriz, letras) {
         for (let j = 0; j < colunas; j++) {
             if (matriz[i][j] == '') {
                 let nova_letra = Math.floor(Math.random() * letras.length);
-                matriz[i][j] = letras[nova_letra];
+                matriz[i][j] = nova_letra;
             }
         }
     }

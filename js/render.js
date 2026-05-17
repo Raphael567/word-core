@@ -1,7 +1,7 @@
 function renderizarTabuleiro() {
     const tabuleiro = document.getElementById("tabuleiro");
-    
     tabuleiro.innerHTML = "";
+
     for (let i = 0; i < linhas; i++) {
         for (let j = 0; j < colunas; j++) {
             const celula = document.createElement("div");
@@ -9,7 +9,9 @@ function renderizarTabuleiro() {
             celula.classList.add("celula");
             celula.innerHTML = matriz[i][j];
 
-            celula.addEventListener("click", () => selecionarCelula(i, j, celula));
+            celula.addEventListener("mousedown", () => iniciarSelecao(i, j, celula));
+            celula.addEventListener("mouseenter", () => arrastarSelecao(i, j, celula));
+            celula.addEventListener("mouseup", finalizarSelecao);
 
             tabuleiro.appendChild(celula);
         }

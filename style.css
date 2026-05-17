@@ -47,3 +47,15 @@ body {
     padding: 6px 12px;
     border-radius: 20px;
 }
+
+.celula.selecionada {
+    background: #3b82f6;
+}
+
+.celula.encontrada {
+    background: #16a34a;
+}
+
+.palavra {
+    transition: .3s;
+}
