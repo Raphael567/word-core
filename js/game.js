@@ -53,6 +53,10 @@ function verificarPalavra() {
             selecaoAtual[i].elemento.classList.add("encontrada");
         }
 
+        if (palavrasEncontradas.length == palavras.length) {
+            mostrarVitoria();
+        }
+
     } else {
         for (let i = 0; i < selecaoAtual.length; i++) {
             selecaoAtual[i].elemento.classList.remove("selecionada");
@@ -76,6 +80,24 @@ function marcarPalavraEncontrada(palavra) {
             itens[i].style.opacity = "0.5";
         }
     }
+}
+
+function mostrarVitoria() {
+    const mensagem = document.createElement("div");
+
+    mensagem.classList.add("vitoria");
+
+    mensagem.innerHTML = `
+        <h2>Parabéns!</h2>
+        <p>Você encontrou todas as palavras.</p>
+        <button onclick="reiniciarJogo()">Jogar novamente</button>
+    `;
+
+    document.body.appendChild(mensagem);
+}
+
+function reiniciarJogo() {
+    location.reload();
 }
 
 function iniciarJogo() {

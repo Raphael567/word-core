@@ -99,7 +99,7 @@ function preencherMatrizLetras(matriz, letras) {
         for (let j = 0; j < colunas; j++) {
             if (matriz[i][j] == '') {
                 let nova_letra = Math.floor(Math.random() * letras.length);
-                matriz[i][j] = nova_letra;
+                matriz[i][j] = letras[nova_letra];
             }
         }
     }
