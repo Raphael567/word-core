@@ -1,7 +1,11 @@
+// Dimensões da matriz do tabuleiro
 const linhas = 25;
 const colunas = 25;
 
+// Letras utilizadas para preencher espaços vazios
 const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+// Lista de palavras do jogo
 const palavras = [
     "CPU",
     "ULA",
@@ -13,33 +17,41 @@ const palavras = [
     "MASSA",
     "DMA",
     "CHIPSELECT",
-    "ADRESSBUS",
     "DATABUS",
+    "ADRESSBUS",
     "INTELCINCO",
     "INTELSETE",
     "DUALCORE",
     "QUADCORE"
 ];
 
+// Estruturas principais do caça-palavras
 let matriz = [];
 let palavrasX = [];
 let palavrasY = [];
 
-//Preenchendo matriz com ''
+
+// Inicializa a matriz preenchendo todas as posições com vazio
 function preencherMatrizVazia(matriz) {
     for (let i = 0; i < linhas; i++) {
         matriz[i] = [];
+
         for (let j = 0; j < colunas; j++) {
             matriz[i][j] = '';
         }
     }
 }
 
+
+// Sorteia metade das palavras para horizontal (X)
+// e metade para vertical (Y)
 function sortearPalavras(palavras) {
     while (palavrasX.length != palavras.length / 2) {
         let indexPalavra = Math.floor(Math.random() * palavras.length);
 
-        if (!palavrasX.includes(palavras[indexPalavra])) palavrasX.push(palavras[indexPalavra]);
+        if (!palavrasX.includes(palavras[indexPalavra])) {
+            palavrasX.push(palavras[indexPalavra]);
+        }
     }
 
     for (let i = 0; i < palavras.length; i++) {
@@ -48,9 +60,16 @@ function sortearPalavras(palavras) {
         if (!palavrasX.includes(palavra)) palavrasY.push(palavra);
     }
 
-    console.log("Palavras na posição X: \n" + palavrasX.join(', \n') + "\n\nPalavras na posição Y: \n" + palavrasY.join(', \n'));
+    console.log(
+        "Palavras na posição X:\n" +
+        palavrasX.join(', \n') +
+        "\n\nPalavras na posição Y:\n" +
+        palavrasY.join(', \n')
+    );
 }
 
+
+// Insere palavras horizontalmente
 function preencherPalavrasPosX(matriz, palavrasX) {
     for (let i = 0; i < palavrasX.length; i++) {
         let palavra = palavrasX[i];
@@ -64,6 +83,9 @@ function preencherPalavrasPosX(matriz, palavrasX) {
     }
 }
 
+
+// Insere palavras verticalmente
+// garantindo que não existam conflitos inválidos
 function preencherPalavrasPosY(matriz, palavrasY) {
     for (let i = 0; i < palavrasY.length; i++) {
         let palavra = palavrasY[i];
@@ -93,18 +115,22 @@ function preencherPalavrasPosY(matriz, palavrasY) {
     }
 }
 
-//Substituindo '' por letras aleatórias
+
+// Preenche espaços vazios com letras aleatórias
 function preencherMatrizLetras(matriz, letras) {
     for (let i = 0; i < linhas; i++) {
         for (let j = 0; j < colunas; j++) {
             if (matriz[i][j] == '') {
                 let nova_letra = Math.floor(Math.random() * letras.length);
+
                 matriz[i][j] = letras[nova_letra];
             }
         }
     }
 }
 
+
+// Monta o tabuleiro completo
 function montarMatriz(matriz, palavras, palavrasX, palavrasY, letras) {
     preencherMatrizVazia(matriz);
     sortearPalavras(palavras);

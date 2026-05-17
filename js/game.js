@@ -1,7 +1,10 @@
+// Controle do estado da partida
 let selecionando = false;
 let selecaoAtual = [];
 let palavrasEncontradas = [];
 
+
+// Inicia a seleção ao pressionar o mouse sobre uma célula
 function iniciarSelecao(linha, coluna, celula) {
     selecionando = true;
     selecaoAtual = [];
@@ -9,12 +12,17 @@ function iniciarSelecao(linha, coluna, celula) {
     adicionarCelula(linha, coluna, celula);
 }
 
+
+// Continua selecionando enquanto o mouse é arrastado
 function arrastarSelecao(linha, coluna, celula) {
     if (!selecionando) return;
 
     adicionarCelula(linha, coluna, celula);
 }
 
+
+// Adiciona uma célula à seleção atual
+// Evita que a mesma célula seja adicionada duas vezes
 function adicionarCelula(linha, coluna, celula) {
     let existe = false;
 
@@ -37,6 +45,8 @@ function adicionarCelula(linha, coluna, celula) {
     }
 }
 
+
+// Verifica se a sequência selecionada forma uma palavra válida
 function verificarPalavra() {
     let palavra = "";
 
@@ -49,15 +59,18 @@ function verificarPalavra() {
 
         marcarPalavraEncontrada(palavra);
 
+        // Mantém a palavra destacada no tabuleiro
         for (let i = 0; i < selecaoAtual.length; i++) {
             selecaoAtual[i].elemento.classList.add("encontrada");
         }
 
+        // Verifica condição de vitória
         if (palavrasEncontradas.length == palavras.length) {
             mostrarVitoria();
         }
 
     } else {
+        // Remove destaque caso a seleção esteja incorreta
         for (let i = 0; i < selecaoAtual.length; i++) {
             selecaoAtual[i].elemento.classList.remove("selecionada");
         }
@@ -66,11 +79,15 @@ function verificarPalavra() {
     selecaoAtual = [];
 }
 
+
+// Finaliza a seleção ao soltar o mouse
 function finalizarSelecao() {
     selecionando = false;
     verificarPalavra();
 }
 
+
+// Risca a palavra encontrada na lista superior
 function marcarPalavraEncontrada(palavra) {
     const itens = document.querySelectorAll(".palavra");
 
@@ -82,6 +99,8 @@ function marcarPalavraEncontrada(palavra) {
     }
 }
 
+
+// Exibe a tela de vitória quando todas as palavras forem encontradas
 function mostrarVitoria() {
     const mensagem = document.createElement("div");
 
@@ -96,10 +115,14 @@ function mostrarVitoria() {
     document.body.appendChild(mensagem);
 }
 
+
+// Reinicia o jogo recarregando a página
 function reiniciarJogo() {
     location.reload();
 }
 
+
+// Inicializa uma nova partida
 function iniciarJogo() {
     montarMatriz(matriz, palavras, palavrasX, palavrasY, letras);
 
@@ -107,4 +130,6 @@ function iniciarJogo() {
     renderizarTabuleiro();
 }
 
+
+// Executa o jogo ao carregar a aplicação
 iniciarJogo();
