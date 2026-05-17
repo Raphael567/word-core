@@ -51,7 +51,7 @@ function sortearPalavras(palavras) {
     console.log("Palavras na posição X: \n" + palavrasX.join(', \n') + "\n\nPalavras na posição Y: \n" + palavrasY.join(', \n'));
 }
 
-function preecnherPalavrasPosX(matriz, palavrasX) {
+function preencherPalavrasPosX(matriz, palavrasX) {
     for (let i = 0; i < palavrasX.length; i++) {
         let palavra = palavrasX[i];
         let linha = i;
@@ -64,7 +64,7 @@ function preecnherPalavrasPosX(matriz, palavrasX) {
     }
 }
 
-function preecnherPalavrasPosY(matriz, palavrasY) {
+function preencherPalavrasPosY(matriz, palavrasY) {
     for (let i = 0; i < palavrasY.length; i++) {
         let palavra = palavrasY[i];
         let encaixou = false;
@@ -108,8 +108,8 @@ function preencherMatrizLetras(matriz, letras) {
 function montarMatriz(matriz, palavras, palavrasX, palavrasY, letras) {
     preencherMatrizVazia(matriz);
     sortearPalavras(palavras);
-    preecnherPalavrasPosX(matriz, palavrasX);
-    preecnherPalavrasPosY(matriz, palavrasY);
+    preencherPalavrasPosX(matriz, palavrasX);
+    preencherPalavrasPosY(matriz, palavrasY);
     preencherMatrizLetras(matriz, letras);
 }
 

@@ -1,0 +1,44 @@
+body {
+    font-family: Arial;
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+#tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(25, 30px);
+    gap: 2px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.celula {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1f2937;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.celula:hover {
+    background: #2563eb;
+}
+
+#palavras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.palavra {
+    background: #374151;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
