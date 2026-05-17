@@ -38,14 +38,14 @@ let palavrasY = [];
 function sortearPalavras(palavras) {
     while (palavrasX.length != palavras.length / 2) {
         let indexPalavra = Math.floor(Math.random() * palavras.length);
-        
-        if(!palavrasX.includes(palavras[indexPalavra])) palavrasX.push(palavras[indexPalavra]);
+
+        if (!palavrasX.includes(palavras[indexPalavra])) palavrasX.push(palavras[indexPalavra]);
     }
 
-    for(let i = 0; i < palavras.length; i++) {
+    for (let i = 0; i < palavras.length; i++) {
         let palavra = palavras[i];
 
-        if(!palavrasX.includes(palavra)) palavrasY.push(palavra);
+        if (!palavrasX.includes(palavra)) palavrasY.push(palavra);
     }
 
     console.log("Palavras na posição X: \n" + palavrasX.join(', \n') + "\n\nPalavras na posição Y: \n" + palavrasY.join(', \n'));
@@ -69,12 +69,12 @@ function preencherPalavrasPosY(matriz, palavrasY) {
         let palavra = palavrasY[i];
         let encaixou = false;
 
-        while(!encaixou) {
-            let coluna = i+10;
+        while (!encaixou) {
+            let coluna = i + 10;
             let pos_y = Math.floor(Math.random() * (linhas - palavra.length + 1));
 
             let podeInserir = true;
-    
+
             for (let k = 0; k < palavra.length; k++) {
                 if (matriz[pos_y + k][coluna] !== '' && matriz[pos_y + k][coluna] !== palavra[k]) {
                     podeInserir = false;
@@ -82,8 +82,8 @@ function preencherPalavrasPosY(matriz, palavrasY) {
                 }
             }
 
-            if(podeInserir) {
-                for(let k = 0; k < palavra.length; k++) {
+            if (podeInserir) {
+                for (let k = 0; k < palavra.length; k++) {
                     matriz[pos_y + k][coluna] = palavra[k];
                 }
 
@@ -113,5 +113,49 @@ function montarMatriz(matriz, palavras, palavrasX, palavrasY, letras) {
     preencherMatrizLetras(matriz, letras);
 }
 
-montarMatriz(matriz, palavras, palavrasX, palavrasY, letras);
-console.table(matriz);
+function renderizarTabuleiro() {
+    const tabuleiro = document.getElementById("tabuleiro");
+    
+    tabuleiro.innerHTML = "";
+    for (let i = 0; i < linhas; i++) {
+        for (let j = 0; j < colunas; j++) {
+            const celula = document.createElement("div");
+
+            celula.classList.add("celula");
+            celula.innerHTML = matriz[i][j];
+
+            celula.addEventListener("click", () => selecionarCelula(i, j, celula));
+
+            tabuleiro.appendChild(celula);
+        }
+    }
+}
+
+function renderizarListaPalavras() {
+    const lista = document.getElementById("palavras");
+    lista.innerHTML = "";
+
+    for (let i = 0; i < palavras.length; i++) {
+        const item = document.createElement("div");
+
+        item.classList.add("palavra");
+        item.innerHTML = palavras[i];
+
+        lista.appendChild(item);
+    }
+}
+
+function selecionarCelula(linha, coluna, celula) {
+    celula.classList.toggle("selecionada");
+
+    console.log(`Linha: ${linha}, Coluna: ${coluna}`);
+}
+
+function iniciarJogo() {
+    montarMatriz(matriz, palavras, palavrasX, palavrasY, letras);
+
+    renderizarListaPalavras();
+    renderizarTabuleiro();
+}
+
+iniciarJogo();

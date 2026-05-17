@@ -29,6 +29,11 @@ body {
     background: #2563eb;
 }
 
+.celula.selecionada {
+    background: green;
+    color: white;
+}
+
 #palavras {
     display: flex;
     flex-wrap: wrap;
